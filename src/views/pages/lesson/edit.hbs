@@ -1,0 +1,134 @@
+<div class='content-wrapper'>
+    <div class='row'>
+        <div class='col-md-12 grid-margin'>
+            <div class='row'>
+                <div class='col-12 col-xl-8 mb-4 mb-xl-0'>
+                    <h3 class='font-weight-bold title'>Lesson</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-8 grid-margin stretch-card'>
+            <div class='card'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Edit lesson</h4>
+                    {{#if error}}
+                        <div class='alert alert-danger' role='alert'>
+                            {{error}}
+                        </div>
+                    {{/if}}
+                    <form action='{{route}}/{{lesson.id}}?_method=patch' class='forms-sample' method='POST'>
+                        <div class='form-group'>
+                            <label for='title'>Title:</label>
+                            <input
+                                value='{{lesson.title}}'
+                                type='text'
+                                name='title'
+                                class='form-control'
+                                id='title'
+                                placeholder='Enter title'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='description'>Description:</label>
+                            <input
+                                value='{{lesson.description}}'
+                                type='text'
+                                name='description'
+                                class='form-control'
+                                id='description'
+                                placeholder='Enter description'
+                            />
+                        </div>
+                       
+            
+                        <div class='form-group'>
+                            <label for='duration'>Duration:</label>
+                            <input
+                                value='{{lesson.duration}}'
+                                type='text'
+                                name='duration'
+                                class='form-control'
+                                id='duration'
+                                placeholder='Enter duration'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='image'>Image:</label>
+                            <input
+                                value='{{lesson.image}}'
+                                type='text'
+                                name='image'
+                                class='form-control'
+                                id='image'
+                                placeholder='Enter image'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='video'>Video:</label>
+                            <input
+                                value='{{lesson.video}}'
+                                type='text'
+                                name='video'
+                                class='form-control'
+                                id='video'
+                                placeholder='Enter video'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='isPublished'>Publish:</label>
+                            <select
+                                name='isPublished'
+                                id='isPublished'
+                                class='custom-select custom-select-sm form-control form-control-sm'
+                            >
+                                <option selected disabled>-- select publish --</option>
+                                {{#ifEquals this.isPublished 0}}
+                                    <option value='0' selected>Chưa publish</option>
+                                    <option value='1'>Đã publish</option>
+                                {{else}}
+                                    <option value='0'>Chưa publish</option>
+                                    <option value='1' selected>Đã publish</option>
+                                {{/ifEquals}}
+
+                            </select>
+                        </div>
+                        <div class='form-group'>
+                            <label for='courseId'>Course:</label>
+                            <select name='courseId' class='form-control custom-select custom-select-sm' id='courseId'>
+                                <option selected disabled>-- select course --</option>
+                                {{#each courses}}
+                                    {{#ifEquals this.id ../lesson.courseId}}
+                                        <option value='{{this.id}}' selected>
+                                            {{this.title}}
+                                        </option>
+                                    {{else}}
+                                        <option value='{{this.id}}'>
+                                            {{this.title}}
+                                        </option>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='content'>Content:</label>
+                            <textarea
+                                type='text'
+                                name='content'
+                                class='form-control p-5'
+                                id='content'
+                                placeholder='Enter content'
+                            >{{lesson.content}}</textarea>
+                        </div>
+
+                        <button type='submit' class='btn btn-primary mr-2'>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

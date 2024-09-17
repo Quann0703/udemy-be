@@ -1,0 +1,221 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 0 20px;
+  background-color: #fff;
+  box-shadow: 0px 5px 21px -5px #cdd1e1;
+  z-index: 100; }
+
+.nav-search {
+  width: 420px; }
+
+.nav-item {
+  font-size: 1.6rem; }
+  .nav-item .nav-link i {
+    font-size: 2.4rem; }
+  .nav-item .nav-link::after {
+    display: none; }
+
+.logo {
+  font-size: 1.6rem; }
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+
+.sidebar {
+  flex-shrink: 0;
+  margin-top: 16px; }
+
+.collapse.show {
+  display: block;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden; }
+
+.sidebar > .nav {
+  position: sticky;
+  flex-direction: column;
+  top: 74px;
+  left: 0;
+  width: 250px;
+  padding: 0 0 0 16px;
+  background: #fff;
+  overflow-y: hidden;
+  max-height: calc(100vh - 90px);
+  flex-wrap: nowrap;
+  transition: overflow-y linear 2s;
+  z-index: 10; }
+  .sidebar > .nav div {
+    width: 220px; }
+  .sidebar > .nav:hover, .sidebar > .nav:active, .sidebar > .nav:focus {
+    overflow-y: auto; }
+
+.sidebar .nav:not(.sub-menu) .nav-item > .nav-link[aria-expanded='true'] {
+  border-radius: 8px 8px 0 0;
+  background: #4b49ac;
+  color: #fff; }
+
+.sidebar .nav.sub-menu {
+  margin-bottom: 0;
+  margin-top: 0;
+  list-style: none;
+  padding-left: 20px;
+  background: #4b49ac; }
+  .sidebar .nav.sub-menu .nav-link {
+    color: #fff; }
+
+.nav .nav-item {
+  margin-bottom: 6px; }
+
+.nav .nav-item.active .nav-link {
+  background: #4b49ac;
+  color: #fff; }
+
+.nav .nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #6c7383;
+  width: 100%;
+  border-radius: 10px;
+  padding: 12px 16px; }
+  .nav .nav-link i {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    font-size: 1.6rem; }
+  .nav .nav-link .icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .nav .nav-link:hover {
+    background: #4b49ac;
+    color: #fff; }
+
+.icon {
+  margin-right: 6px; }
+
+.content-wrapper {
+  width: 100%;
+  padding: 16px 30px;
+  background: #f5f7ff; }
+  .content-wrapper .title {
+    font-size: 2.4rem; }
+  .content-wrapper .subtitle {
+    font-size: 1.6rem; }
+  .content-wrapper .dropdown-toggle {
+    font-size: 1.4rem;
+    border-radius: 16px;
+    padding: 8px 12px; }
+
+.grid-margin {
+  margin-bottom: 26px; }
+
+.stretch-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch; }
+  .stretch-card .card.tale-bg {
+    background: #dae7ff; }
+
+.card.card-tale {
+  background: #7da0fa;
+  color: #ffffff; }
+
+.card.card-dark-blue {
+  background: #4747a1;
+  color: #ffffff; }
+
+.card.card-light-blue {
+  background: #7978e9;
+  color: #ffffff; }
+
+.card.card-light-danger {
+  background: #f3797e;
+  color: #ffffff; }
+
+.stretch-card > .card {
+  width: 100%;
+  min-width: 100%; }
+
+.card-people {
+  position: relative;
+  padding-top: 20px; }
+
+.card-people img {
+  width: 100%; }
+
+.card-people .weather-info {
+  position: absolute;
+  top: 0;
+  right: 40px; }
+  .card-people .weather-info h2 {
+    font-size: 5rem; }
+
+.card-people .weather-info sup {
+  font-size: 2.4rem; }
+
+.card-people .weather-info .location {
+  font-size: 2rem;
+  margin-bottom: 0; }
+  .card-people .weather-info .location + h6 {
+    font-size: 1.6rem; }
+
+.card .card-body {
+  padding: 20px; }
+
+.card-header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between; }
+
+.btn-create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  border: 0;
+  padding: 10px;
+  border-radius: 8px; }
+
+.card .card-title {
+  color: #010101;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  font-size: 1.8rem;
+  font-weight: 600; }
+
+.card {
+  border-radius: 16px;
+  overflow: hidden; }
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem; }
+
+.fs-30 {
+  font-size: 3rem; }
+
+.app {
+  display: flex;
+  flex-direction: column; }
+
+.container {
+  max-width: 100%;
+  display: flex;
+  padding: 0; }
+
+.content {
+  flex: 1; }

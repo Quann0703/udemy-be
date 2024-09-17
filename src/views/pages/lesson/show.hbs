@@ -1,0 +1,299 @@
+<div class='content-wrapper'>
+    <div class='row'>
+        <div class='col-md-12 grid-margin'>
+            <div class='row'>
+                <div class='col-12 col-xl-8 mb-4 mb-xl-0'>
+                    <h3 class='font-weight-bold title'>Lesson</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-3'>
+            <div class='form-group invalidClass'>
+                <label for='selectCourse'>Course:</label>
+                <select name='courseId' class='form-control custom-select custom-select-sm' id='selectCourse'>
+                    <option selected disabled>-- select course --</option>
+                    {{#each courses}}
+                        {{#ifEquals this.id ../course.id}}
+                            <option value='{{this.id}}' selected>
+                                {{this.title}}
+                            </option>
+                        {{else}}
+                            <option value='{{this.id}}'>
+                                {{this.title}}
+                            </option>
+                        {{/ifEquals}}
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div class='col-md-12 grid-margin stretch-card'>
+
+            <div class='card'>
+                <div class='card-body'>
+                    <div class='card-header'>
+                        <p class='card-title'>Lesson Table</p>
+
+                        <button
+                            class='btn btn-primary btn-create'
+                            type='button'
+                            data-toggle='modal'
+                            data-target='#exampleModal'
+                        >+</button>
+                    </div>
+                    <div class='row'>
+                        <div class='col-12'>
+                            {{#if error}}
+                                <div class='alert alert-danger' role='alert'>
+                                    {{error}}
+                                </div>
+                            {{/if}}
+                            <div class='table-responsive'>
+                                <table class='display expandable-table' style='width: 100%'>
+                                    <thead>
+                                        <tr>
+                                            <th>Quote#</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Duration</th>
+                                            <th>Image</th>
+                                            <th>Publish</th>
+                                            <th>Course</th>
+                                            <th>CreatedAt</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each lessons.rows}}
+                                            <tr>
+                                                <td>
+                                                    <input value='{{this.id}}' type='checkbox' name='id' id='id' />
+                                                    {{sum @index 1}}
+                                                </td>
+                                                <td>{{this.title}}</td>
+                                                <td>{{this.description}}</td>
+                                                <td>{{this.duration}}</td>
+                                                <td>{{this.image}}</td>
+                                                <td>
+                                                    {{#if this.isPublished}}
+                                                        Đã phát hành
+                                                    {{else}}
+                                                        Chưa phát hành
+                                                    {{/if}}
+                                                </td>
+                                                <td>{{{'course.title'}}}</td>
+                                                <td>{{formatDate this.createdAt}}</td>
+                                                <td class='details-control'>
+                                                    <a
+                                                        href='{{../route}}/{{this.id}}/edit'
+                                                        id='btn-edit'
+                                                        class='btn btn-primary'
+                                                    >Edit</a>
+                                                    <button
+                                                        id='btn-confirm-delete'
+                                                        data-id='{{this.id}}'
+                                                        class='btn btn-danger'
+                                                        data-toggle='modal'
+                                                        data-target='#delete-modal'
+                                                    >Delete</button>
+                                                </td>
+                                            </tr>
+
+                                        {{/each}}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                     <div class='row'>
+                        <div class='col-12'>
+                            <nav class="mt-5">
+                                <ul class='pagination pagination-lg justify-content-end'>
+                                    <li class='page-item {{op lessons.page '==' 1 'disabled'}}'>
+                                        <a class='page-link' href='{{route}}?c={{course.id}}&page={{op lessons.page '-' 1}}' aria-label='Previous'>
+                                            <span aria-hidden='true'>&laquo;</span>
+                                            <span class='sr-only'>Previous</span>
+                                        </a>
+                                    </li>
+                                    {{#times pageNumber}}
+                                        {{#ifEquals @index ../lessons.page}}
+                                        <li class='page-item active'>
+                                            <a class='page-link' href='{{route}}?c={{course.id}}&page={{op @index '+' 1}}'>{{op @index '+' 1}}</a>
+                                        </li>
+                                        {{else}}
+                                        <li class='page-item'>
+                                                <a class='page-link' href='{{route}}?c={{course.id}}&page={{op @index '+' 1}}'>{{op @index '+' 1}}</a>
+                                        </li>
+                                        {{/ifEquals}}
+                                    {{/times}}
+                                    <li class='page-item 
+                                    {{op lessons.page '==' pageNumber 'disabled'}}'>
+                                        <a class='page-link' href='{{route}}?c={{course.id}}&page={{op lessons.page '+' 1}}' aria-label='Next'>
+                                            <span aria-hidden='true'>&raquo;</span>
+                                            <span class='sr-only'>Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! Modal create }}
+<div
+    class='modal fade'
+    id='exampleModal'
+    tabindex='-1'
+    role='dialog'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog modal-lg' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Create new lesson</h5>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                <form name='form' action='{{route}}' method="POST">
+
+                    <div class='form-group'>
+                        <label for='title'>Title:</label>
+                        <input type='text' name='title' class='form-control' id='title' placeholder='Enter title' required />
+                    </div>
+                    <div class='form-group'>
+                        <label for='description'>Description:</label>
+                        <input
+                            type='text'
+                            name='description'
+                            class='form-control'
+                            id='description'
+                            placeholder='Enter description'
+                            required
+                        />
+                    </div>
+                    
+                    <div class='form-group'>
+                        <label for='duration'>Duration:</label>
+                        <input
+                            type='text'
+                            name='duration'
+                            class='form-control'
+                            id='duration'
+                            placeholder='Enter duration'
+                            required
+                        />
+                    </div>
+                    <div class='form-group'>
+                        <label for='image'>Image:</label>
+                        <input type='text' name='image' class='form-control' id='image' placeholder='Enter image' required/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='video'>Video:</label>
+                        <input type='text' name='video' class='form-control' id='video' placeholder='Enter video' required/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='isPublished'>Publish:</label>
+                        <select
+                            name='isPublished'
+                            id='isPublished'
+                            class='custom-select custom-select-sm form-control form-control-sm'
+                            required
+                        >
+                            <option selected disabled>-- select publish --</option>
+                            <option value='0'>Chưa publish</option>
+                            <option value='1'>Đã publish</option>
+                        </select>
+                    </div>
+                    <div class='form-group'>
+                        <label for='courseId'>Course:</label>
+                        <select name='courseId' class='form-control custom-select custom-select-sm' id='courseId' required>
+                            <option selected disabled>-- select course --</option>
+                            {{#each courses}}
+                                {{#ifEquals this.id ../course.id}}
+                                    <option value='{{this.id}}' selected>
+                                        {{this.title}}
+                                    </option>
+                                {{else}}
+                                    <option value='{{this.id}}'>
+                                        {{this.title}}
+                                    </option>
+                                {{/ifEquals}}
+                            {{/each}}
+                           
+                        </select>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='content'>Content:</label>
+                        <textarea
+                            type='text'
+                            name='content'
+                            class='form-control'
+                            id='content'
+                            placeholder='Enter content'
+                        ></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                <button id='btn-create' type='button' class='btn btn-primary'>Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! Modal delete }}
+<div
+    class='modal fade'
+    id='delete-modal'
+    tabindex='-1'
+    role='dialog'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Delete lessons</h5>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                Bạn có chắc chắn muốn xóa?
+            </div>
+            <div class='modal-footer'>
+                <button id='btn-delete' type='button' class='btn btn-danger'>Ok</button>
+                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form name='form-delete' action='{{route}}' method='POST'></form>
+
+<script src='/js/main.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const message = '{{{message}}}'; 
+        if(message) alert(message); 
+        const selectCourse = document.getElementById('selectCourse'); 
+        selectCourse.onchange = function (e) { 
+            const val = e.target.value;
+            window.location.href = "/lessons?c=" + val
+        }
+    })
+</script>

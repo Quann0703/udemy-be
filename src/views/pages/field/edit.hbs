@@ -1,0 +1,97 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="row">
+        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+          <h3 class="font-weight-bold title">Field</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Edit field</h4>
+          {{#if error}}
+            <div class="alert alert-danger" role="alert">
+              {{error}}
+            </div>
+          {{/if}}
+          <form
+            action="{{route}}/{{field.id}}?_method=patch"
+            class="forms-sample"
+            method="POST"
+          >
+            <div class="form-group">
+              <label for="title">Title:</label>
+              <input
+                value="{{field.title}}"
+                type="text"
+                name="title"
+                class="form-control"
+                id="title"
+                placeholder="Enter title"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input
+                value="{{field.description}}"
+                type="text"
+                name="description"
+                class="form-control"
+                id="description"
+                placeholder="Enter description"
+              />
+            </div>
+            <div class="form-group">
+              <label for="image">Image:</label>
+              <input
+                value="{{field.image}}"
+                type="text"
+                name="image"
+                class="form-control"
+                id="image"
+                placeholder="Enter image"
+              />
+            </div>
+            <div class="form-group">
+                <label for="categoryId">categories:</label>
+                <select name='categoryId' class='form-control custom-select custom-select-sm' id='selectCourse'>
+                    <option selected disabled>-- select category --</option>
+                    {{#each categories}}
+                        {{#ifEquals this.id ../field.id}}
+                            <option value='{{this.id}}' selected>
+                                {{this.title}}
+                            </option>
+                        {{else}}
+                            <option value='{{this.id}}'>
+                                {{this.title}}
+                            </option>
+                        {{/ifEquals}}
+                    {{/each}}
+                </select>
+            </div>
+
+            
+            <div class="form-group">
+              <label for="content">Content:</label>
+              <textarea
+                type="text"
+                name="content"
+                class="form-control"
+                id="content"
+                placeholder="Enter content"
+              >
+                {{field.content}}
+              </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class='content-wrapper'>
+    <div class='row'>
+        <div class='col-md-12 grid-margin'>
+            <div class='row'>
+                <div class='col-12 col-xl-8 mb-4 mb-xl-0'>
+                    <h3 class='font-weight-bold title'>Category</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-8 grid-margin stretch-card'>
+            <div class='card'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Edit category</h4>
+                    {{#if error}}
+                        <div class='alert alert-danger' role='alert'>
+                            {{error}}
+                        </div>
+                    {{/if}}
+                    <form action='{{route}}/{{category.id}}?_method=patch' class='forms-sample' method='POST'>
+                        <div class='form-group'>
+                            <label for='title'>Title:</label>
+                            <input
+                                value='{{category.title}}'
+                                type='text'
+                                name='title'
+                                class='form-control'
+                                id='title'
+                                placeholder='Enter title'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='description'>Description:</label>
+                            <input
+                                value='{{category.description}}'
+                                type='text'
+                                name='description'
+                                class='form-control'
+                                id='description'
+                                placeholder='Enter description'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='image'>Image:</label>
+                            <input
+                                value='{{category.image}}'
+                                type='text'
+                                name='image'
+                                class='form-control'
+                                id='image'
+                                placeholder='Enter image'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='content'>Content:</label>
+                            <textarea
+                                type='text'
+                                name='content'
+                                class='form-control'
+                                id='content'
+                                placeholder='Enter content'
+                            >
+                                {{category.content}}
+                            </textarea>
+                        </div>
+
+                        <button type='submit' class='btn btn-primary mr-2'>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

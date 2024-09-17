@@ -1,0 +1,173 @@
+<div class='content-wrapper'>
+    <div class='row'>
+        <div class='col-md-12 grid-margin'>
+            <div class='row'>
+                <div class='col-12 col-xl-8 mb-4 mb-xl-0'>
+                    <h3 class='font-weight-bold title'>Course</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-8 grid-margin stretch-card'>
+            <div class='card'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Edit course</h4>
+                    {{#if error}}
+                        <div class='alert alert-danger' role='alert'>
+                            {{error}}
+                        </div>
+                    {{/if}}
+                    <form action='{{route}}/{{course.id}}?_method=patch' class='forms-sample' method='POST'>
+                        <div class='form-group'>
+                            <label for='title'>Title:</label>
+                            <input
+                                value='{{course.title}}'
+                                type='text'
+                                name='title'
+                                class='form-control'
+                                id='title'
+                                placeholder='Enter title'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='description'>description:</label>
+                            <input
+                                value='{{course.description}}'
+                                type='text'
+                                name='description'
+                                class='form-control'
+                                id='description'
+                                placeholder='Enter description'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='image'>image:</label>
+                            <input
+                                value='{{course.image}}'
+                                type='text'
+                                name='image'
+                                class='form-control'
+                                id='image'
+                                placeholder='Enter image'
+                            />
+                        </div>
+                        <div class='form-group'>
+                            <label for='price'>price:</label>
+                            <input
+                                value='{{course.price}}'
+                                type='text'
+                                name='price'
+                                class='form-control'
+                                id='price'
+                                placeholder='Enter price'
+                            />
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='rank'>rank:</label>
+                            <input
+                                value='{{course.rank}}'
+                                type='text'
+                                name='rank'
+                                class='form-control'
+                                id='rank'
+                                placeholder='Enter rank'
+                            />
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='rating'>rating:</label>
+                            <input
+                                value='{{course.rating}}'
+                                type='text'
+                                name='rating'
+                                class='form-control'
+                                id='rating'
+                                placeholder='Enter rating'
+                            />
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='language'>language:</label>
+                            <input
+                                value='{{course.language}}'
+                                type='text'
+                                name='language'
+                                class='form-control'
+                                id='language'
+                                placeholder='Enter rating'
+                            />
+                        </div>
+                      
+                        <div class='form-group'>
+                            <label for='video'>Video:</label>
+                            <input
+                                value='{{course.video}}'
+                                type='text'
+                                name='video'
+                                class='form-control'
+                                id='video'
+                                placeholder='Enter video'
+                            />
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='topicId'>Topic:</label>
+                            <select name='topicId' class='form-control' id='categoryId'>
+                                <option selected disabled>-- Chọn chủ đề --</option>
+                                {{#each topics}}
+                                    {{#ifEquals this.id ../course.topicId}}
+                                        <option value='{{this.id}}' selected>
+                                            {{this.title}}
+                                        </option>
+                                    {{else}}
+                                        <option value='{{this.id}}'>
+                                            {{this.title}}
+                                        </option>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </select>
+                        </div>
+                        
+                        <div class='form-group'>
+                            <label for='content'>Content:</label>
+                            <textarea
+                                type='text'
+                                name='content'
+                                class='form-control'
+                                id='content'
+                                placeholder='Enter content'
+                            >{{course.content}}</textarea>
+                        </div>
+
+                         <div class='form-group'>
+                            <label for='require'>Require:</label>
+                            <textarea
+                                type='text'
+                                name='require'
+                                class='form-control'
+                                id='content'
+                                placeholder='Enter require'
+                            >{{course.require}}</textarea>
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='describe'>Describe:</label>
+                            <textarea
+                                type='text'
+                                name='describe'
+                                class='form-control'
+                                id='content'
+                                placeholder='Enter describe'
+                            >{{course.describe}}</textarea>
+                        </div>
+
+                        <button type='submit' class='btn btn-primary mr-2'>Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
